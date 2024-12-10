@@ -19,7 +19,7 @@
 #define RESET			"\033[0m"
 #define BOLD			"\033[1m"
 
-void	myprint(std::string str)
+void	aocprint(std::string str)
 {
 	std::cout << str << std::endl;
 }
@@ -36,12 +36,13 @@ int main(int ac, char **av)
 	size_t dist = 0;	// distance for question 01
 	size_t simi = 0;	// similarity for question 02
 
+	aocprint("[ aoc24-01 ]");
 	if (ac != 2)
-		return (myprint("Provide Input file"), 0);
+		return (aocprint("Provide Input file"), 0);
 
 	fs.open(av[1]);
 	if (fs.is_open() == false)
-		return (myprint("Failed to open file: " + std::string(av[1])), 1);
+		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
 
 
 	// load the data
