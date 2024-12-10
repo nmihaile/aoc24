@@ -63,6 +63,8 @@ int main(int ac, char **av)
 		return (aocprint("Provide Input file"), 1);
 	
 	fs.open(av[1]);
+	if (fs.is_open() == false)
+		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
 
 	// Parsinge
 	int i = 0;
