@@ -24,16 +24,18 @@ void aocprint(std::string str)
 	std::cout << str << std::endl;
 }
 
-void	strip_zeros(std::string& str)
-{
-	unsigned long n = std::stoul(str);
-	str = std::to_string(n);
-}
+// std::string	strip_zeros(const std::string& str)
+// {
+// 	unsigned long n = std::stoul(str);
+// 	return std::to_string(n);
+// }
 
 void	blink(Stones &stones)
 {
 	Stones nstones;
-	for (Stone& stone : stones)
+	nstones.reserve(stones.size() * 2);
+
+	for (Stone stone : stones)
 	{
 		if (stone == 0)
 		{
@@ -41,25 +43,42 @@ void	blink(Stones &stones)
 			continue ;
 		}
 
-		std::string str(std::to_string(stone));
-		strip_zeros(str);
-		size_t len = str.length();
-		if (len % 2 == 0)
-		{
-			len /= 2;
-			std::string s = str.substr(0, len);
-			strip_zeros(s);
-			nstones.emplace_back(std::stoul(s));
+		// std::string str(std::to_string(stone));
+		// int len = str.length();
 
-			s = str.substr(len, len);
-			strip_zeros(s);
-			nstones.emplace_back(std::stoul(s));
+		// int digits = static_cast<int>(std::log10(stone)) + 1;
+
+		int digits = 0;
+		Stone pebble = stone;
+		while (pebble > 0)
+		{
+			pebble /= 10;
+			++digits;
+		}
+
+		if (digits % 2 == 0)
+		{
+			int split = digits / 2;
+
+			int factor = 1;
+			for (int i = 0; i < split; ++i)
+				factor *= 10;
+
+			nstones.emplace_back( stone / factor );
+			nstones.emplace_back( stone % factor );
+			// nstones.emplace_back(std::stoul(str.substr(0, len)));
+			// nstones.emplace_back(std::stoul(strip_zeros(str.substr(len))));
 			continue ;
 		}
 
 		nstones.emplace_back(stone * 2024);
 	}
-	stones = nstones;
+	stones = std::move(nstones);
+}
+
+unsigned int	blink_times(Stones& stones, unsigned int times)
+{
+	// Lookup Tabulation und Dynamic Programming
 }
 
 int	main(int ac, char **av)
@@ -88,13 +107,13 @@ int	main(int ac, char **av)
 		blink(stones);
 	std::cout << BLUE << "Answer 01: " << LIGHTYELLOW << BOLD << stones.size() << RESET << std::endl;
 
-	for (int i = 0; i < 75; i++)
+	for (int i = 0; i < 50; i++)
 		blink(stones2);
 	std::cout << BLUE << "Answer 02: " << LIGHTYELLOW << BOLD << stones2.size() << RESET << std::endl;
 
 	// Print 
 	// for (Stone& stone : stones)
-	// 	std::cout << std::setw(10) << stone.first << " | " << std::setw(10) << stone.second << std::endl;
+	// 	std::cout << stone << std::endl;
 
 	fs.close();
 
