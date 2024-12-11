@@ -79,6 +79,9 @@ void	blink(Stones &stones)
 unsigned int	blink_times(Stones& stones, unsigned int times)
 {
 	// Lookup Tabulation und Dynamic Programming
+	(void)stones;
+	(void)times;
+	return (times);
 }
 
 int	main(int ac, char **av)
@@ -107,9 +110,10 @@ int	main(int ac, char **av)
 		blink(stones);
 	std::cout << BLUE << "Answer 01: " << LIGHTYELLOW << BOLD << stones.size() << RESET << std::endl;
 
-	for (int i = 0; i < 50; i++)
-		blink(stones2);
-	std::cout << BLUE << "Answer 02: " << LIGHTYELLOW << BOLD << stones2.size() << RESET << std::endl;
+	// for (int i = 0; i < 75; i++)
+	unsigned long q2_count;
+	q2_count = blink_times(stones2, 75);
+	std::cout << BLUE << "Answer 02: " << LIGHTYELLOW << BOLD << q2_count << RESET << std::endl;
 
 	// Print 
 	// for (Stone& stone : stones)
