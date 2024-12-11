@@ -16,8 +16,8 @@
 #define RESET			"\033[0m"
 #define BOLD			"\033[1m"
 
-typedef std::pair<std::string, unsigned long>	Stone;
-typedef std::vector<Stone> 			Stones;
+typedef unsigned long		Stone;
+typedef std::vector<Stone> 	Stones;
 
 void aocprint(std::string str)
 {
@@ -35,29 +35,29 @@ void	blink(Stones &stones)
 	Stones nstones;
 	for (Stone& stone : stones)
 	{
-		if (stone.second == 0)
+		if (stone == 0)
 		{
-			nstones.emplace_back("1", 1);
+			nstones.emplace_back(1);
 			continue ;
 		}
 
-		size_t len = stone.first.length();
+		std::string str(std::to_string(stone));
+		strip_zeros(str);
+		size_t len = str.length();
 		if (len % 2 == 0)
 		{
 			len /= 2;
-			std::string str = stone.first.substr(0, len);
-			strip_zeros(str);
-			nstones.emplace_back(str, std::stoul(str));
+			std::string s = str.substr(0, len);
+			strip_zeros(s);
+			nstones.emplace_back(std::stoul(s));
 
-			str = stone.first.substr(len, len);
-			strip_zeros(str);
-			nstones.emplace_back(str, std::stoul(str));
+			s = str.substr(len, len);
+			strip_zeros(s);
+			nstones.emplace_back(std::stoul(s));
 			continue ;
 		}
 
-		// unsigned long n = std::stoul(stone.first);
-		unsigned long n = stone.second * 2024;
-		nstones.emplace_back(std::to_string(n), n);
+		nstones.emplace_back(stone * 2024);
 	}
 	stones = nstones;
 }
@@ -79,7 +79,7 @@ int	main(int ac, char **av)
 	while (std::getline(fs, str, ' '))
 	{
 		unsigned long n = std::stoul(str);
-		stones.emplace_back(std::to_string(n), n);
+		stones.emplace_back(n);
 	}
 	
 	stones2 = stones;
@@ -88,9 +88,9 @@ int	main(int ac, char **av)
 		blink(stones);
 	std::cout << BLUE << "Answer 01: " << LIGHTYELLOW << BOLD << stones.size() << RESET << std::endl;
 
-	// for (int i = 0; i < 75; i++)
-	// 	blink(stones2);
-	// std::cout << BLUE << "Answer 02: " << LIGHTYELLOW << BOLD << stones2.size() << RESET << std::endl;
+	for (int i = 0; i < 75; i++)
+		blink(stones2);
+	std::cout << BLUE << "Answer 02: " << LIGHTYELLOW << BOLD << stones2.size() << RESET << std::endl;
 
 	// Print 
 	// for (Stone& stone : stones)
