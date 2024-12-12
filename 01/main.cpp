@@ -7,22 +7,7 @@
 #include <algorithm>
 #include <unistd.h> 
 #include <cmath>
-
-#define BG				"\033[48;5;4m"
-#define LIGHTRED		"\033[91m"
-#define LIGHTGREEN		"\033[92m"
-#define LIGHTYELLOW		"\033[93m"
-#define BLUE			"\033[34m"
-#define LIGHTBLUE		"\033[94m"
-#define LIGHTMAGENTA	"\033[95m"
-#define LIGHTCYAN		"\033[96m"
-#define RESET			"\033[0m"
-#define BOLD			"\033[1m"
-
-void	aocprint(std::string str)
-{
-	std::cout << str << std::endl;
-}
+#include "aoc-util.hpp"
 
 int main(int ac, char **av)
 {
@@ -97,3 +82,5 @@ int main(int ac, char **av)
 
 	return (0);
 }
+
+// clang++ -Wall -Wextra -Werror -std=c++11  main.cpp && ./a.out input
