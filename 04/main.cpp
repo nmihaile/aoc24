@@ -15,9 +15,19 @@ void	print_puzzle(Puzzle& puzzle)
 	}
 }
 
-bool	search(Puzzle& puzzle, int dx, int dy, std::string word)
+bool	search(Puzzle& puzzle, int x, int y, int dx, int dy, int w, int h, std::string word)
 {
-	return (true);
+	if (x < 0 || y < 0 || x >= w || y >= h)
+		return (false);
+	if (word.length() == 1)
+	{
+		if (puzzle[y][x] == word[0])
+			return (true);
+		return (false);
+	}
+	if (puzzle[y][x] == word[0])
+		return ( search(puzzle, x + dx, y + dy, dx, dy, w, h, word.substr(1)) );
+	return (false);
 }
 
 int	main(int ac, char **av)
@@ -41,7 +51,25 @@ int	main(int ac, char **av)
 
 	fs.close();
 
-	print_puzzle(puzzle);
+	// print_puzzle(puzzle);
+
+	// Q1: count words in puzzle
+	size_t	count = 0;
+	int h = static_cast<int>(puzzle.size());
+	int w = static_cast<int>(puzzle[0].size());
+	for (int y = 0; y < h; ++y)
+		for (int x = 0; x < w; ++x)
+		{
+			count += search(puzzle, x, y, -1,  0, w, h, "XMAS");
+			count += search(puzzle, x, y,  1,  0, w, h, "XMAS");
+			count += search(puzzle, x, y,  0, -1, w, h, "XMAS");
+			count += search(puzzle, x, y,  0,  1, w, h, "XMAS");
+			count += search(puzzle, x, y, -1, -1, w, h, "XMAS");
+			count += search(puzzle, x, y,  1, -1, w, h, "XMAS");
+			count += search(puzzle, x, y, -1,  1, w, h, "XMAS");
+			count += search(puzzle, x, y,  1,  1, w, h, "XMAS");
+		}
+	std::cout << BLUE << "Answer 01: " << LIGHTYELLOW << BOLD << count << RESET << std::endl;
 
 	return (0);
 }
