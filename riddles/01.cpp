@@ -7,9 +7,11 @@
 #include <algorithm>
 #include <unistd.h> 
 #include <cmath>
-#include "aoc-util.hpp"
+#include "aoc-utils.hpp"
 
-int main(int ac, char **av)
+#define INPUT "input/input01"
+
+int main()
 {
 	std::fstream 		fs;
 	std::string 		line;
@@ -22,12 +24,10 @@ int main(int ac, char **av)
 	size_t simi = 0;	// similarity for question 02
 
 	aocprint("[ aoc24-01 ]");
-	if (ac != 2)
-		return (aocprint("Provide Input file"), 0);
 
-	fs.open(av[1]);
+	fs.open(INPUT);
 	if (fs.is_open() == false)
-		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
+		return (aocprint(std::string("Failed to open file: ") + INPUT), 1);
 
 
 	// load the data
