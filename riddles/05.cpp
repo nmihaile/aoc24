@@ -2,13 +2,15 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "aoc-util.hpp"
+#include "aoc-utils.hpp"
+
+#define INPUT "input/input05"
 
 typedef std::pair<int,int>				Rule;
 typedef std::vector<Rule>				Rules;
 typedef std::vector<std::vector<int>>	Updates;
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	std::string		line;
 	std::fstream	fs;
@@ -17,12 +19,9 @@ int	main(int ac, char **av)
 
 	aocprint("[ aoc24-05 ]");
 
-	if (ac != 2)
-		return (aocprint("Provide Input file"), 1);
-	
-	fs.open(av[1]);
+	fs.open(INPUT);
 	if (fs.is_open() == false)
-		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
+		return (aocprint("Failed to open file: " + std::string(INPUT)), 1);
 
 	// Load Rules
 	while (std::getline(fs, line))
