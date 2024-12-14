@@ -3,8 +3,9 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include "aoc-utils.hpp"
 
-#include "aoc-util.hpp"
+#define INPUT "input/input12"
 
 typedef std::vector<std::vector<char>>	Garden;
 
@@ -42,7 +43,7 @@ size_t	calc(Garden& garden, int x, int y, int sx, int sy, char plant, size_t& ar
 	return (perim);
 }
 
-int	main(int ac, char **av)
+int	main()
 {
 	std::string		line;
 	std::fstream	fs;
@@ -50,12 +51,9 @@ int	main(int ac, char **av)
 
 	aocprint("[ aoc24-12 ]");
 
-	if (ac != 2)
-		return (aocprint("Provide Input file"), 1);
-	
-	fs.open(av[1]);
+	fs.open(INPUT);
 	if (fs.is_open() == false)
-		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
+		return (aocprint("Failed to open file: " + std::string(INPUT)), 1);
 
 	// Load map
 	size_t y = 0;
@@ -94,3 +92,4 @@ int	main(int ac, char **av)
 }
 
 // clang++ -Wall -Wextra -Werror -std=c++11  main.cpp && ./a.out input
+// make 12

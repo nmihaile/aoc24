@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 
+#define INPUT "input/input03"
+
 #define BG				"\033[48;5;4m"
 #define LIGHTRED		"\033[91m"
 #define LIGHTGREEN		"\033[92m"
@@ -29,20 +31,18 @@ size_t	get_next_dont(std::string str, size_t pos)
 	return ( str.find("don't()", pos));
 }
 
-int	main(int ac, char **av)
+int	main()
 {
 	std::string	line;
 	std::string str;
 	std::fstream fs;
 
 	aocprint("[ aoc24-03 ]");
-	if (ac != 2)
-		return (aocprint("Provide Input file"), 1);
 	
 	// load data from file
-	fs.open(av[1]);
+	fs.open(INPUT);
 	if (fs.is_open() == false)
-		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
+		return (aocprint("Failed to open file: " + std::string(INPUT)), 1);
 	while (std::getline(fs, line))
 		str += line;
 	fs.close();
@@ -144,3 +144,4 @@ int	main(int ac, char **av)
 }
 
 // clang++ -Wall -Wextra -Werror -std=c++11  main.cpp && ./a.out input
+// make 03
