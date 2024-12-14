@@ -1,7 +1,9 @@
 
 #include <iostream>
 #include <fstream>
-#include "aoc-util.hpp"
+#include "aoc-utils.hpp"
+
+#define INPUT "input/input04"
 
 typedef std::vector<std::vector<char>> Puzzle;
 
@@ -39,7 +41,7 @@ int	search_mas(Puzzle& puzzle, int x, int y, int w, int h)
 	return (0);
 }
 
-int	main(int ac, char **av)
+int	main()
 {
 	std::string		line;
 	std::fstream	fs;
@@ -47,12 +49,10 @@ int	main(int ac, char **av)
 	Puzzle	puzzle;
 
 	aocprint("[ aoc24-04 ]");
-	if (ac != 2)
-		return (aocprint("Provide Input file"), 1);
 
-	fs.open(av[1]);
+	fs.open(INPUT);
 	if (fs.is_open() == false)
-		return (aocprint("Failed to open file: " + std::string(av[1])), 1);
+		return (aocprint("Failed to open file: " + std::string(INPUT)), 1);
 
 	// Load input
 	while (std::getline(fs, line))
@@ -93,3 +93,4 @@ int	main(int ac, char **av)
 }
 
 // clang++ -Wall -Wextra -Werror -std=c++11  main.cpp && ./a.out input
+// make 04
