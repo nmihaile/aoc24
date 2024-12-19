@@ -74,6 +74,9 @@ void	clearmem(Mem& mem)
 
 void	floodfill(Mem& mem, vec2 p, const int& MemSize, int count)
 {
+	// Nice optimisation right here:
+	if (mem[MemSize - 1][MemSize - 1] < INT_MAX)
+		return ;
 	if (p.x < 0 || p.y < 0 || p.x > MemSize - 1 || p.y > MemSize - 1 || mem[p.y][p.x] == -2)
 		return ;
 	if (mem[p.y][p.x] <= count)
@@ -84,16 +87,6 @@ void	floodfill(Mem& mem, vec2 p, const int& MemSize, int count)
 	floodfill(mem, vec2{p.x - 1,p.y    }, MemSize, count);
 	floodfill(mem, vec2{p.x    ,p.y - 1}, MemSize, count);
 }
-
-// bool validPos(vec2& p, Mem& mem, const int MemSize)
-// {
-// 	if (p.x < 0 || p.x > MemSize - 1 ||
-// 		p.y < 0 || p.y > MemSize - 1 ||
-// 		mem[p.y][p.x] == -2)
-// 		return (false);
-	
-// 	return (true);
-// }
 
 int	main()
 {
