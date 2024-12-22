@@ -1,5 +1,5 @@
 CC			=	clang++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11  -g -fsanitize=address
+CPPFLAGS	=	-Wall -Wextra -Werror -std=c++11  # -g -fsanitize=address
 
 01:
 	@$(CC) $(CPPFLAGS) riddles/01.cpp -o m && ./m

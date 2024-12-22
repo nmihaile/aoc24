@@ -54,28 +54,21 @@ int main()
 	std::sort( stacks[1].begin(), stacks[1].end() );
 
 	// calculate the distance
-	{int i = 0;
-	while (stacks[0][i])
-	{
+	for (size_t i = 0; i < stacks[0].size(); ++i)
 		dist += std::abs(stacks[0][i] - stacks[1][i]);
-		i++;
-	}}
 	std::cout << BLUE << "Answer 01: " << LIGHTYELLOW << BOLD << dist << RESET << std::endl;
 
 	// calculate the similarity
-	{int i = 0;
-	while (stacks[0][i])
+	for (size_t i = 0; i < stacks[0].size(); ++i )
 	{
-		int j = 0;
 		int count = 0;
-		while (stacks[1][j])
+		for (size_t j = 0; j < stacks[0].size(); ++j)
 		{
-			if (stacks[0][i] == stacks[1][j++])
+			if (stacks[0][i] == stacks[1][j])
 				count++;
 		}
 		simi += stacks[0][i] * count;
-		i++;
-	}}
+	}
 	std::cout << BLUE << "Answer 02: " << LIGHTYELLOW << BOLD << simi << RESET << std::endl;
 
 	fs.close();
